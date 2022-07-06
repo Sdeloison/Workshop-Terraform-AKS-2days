@@ -8,11 +8,11 @@
 #                                                                                                   |_|                                         
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.3"
   backend "azurerm" {
-    resource_group_name  = "RG-AKSCluster"     # mettre ici le nom du resource group de vos ressource
-    storage_account_name = "terraformstan"  # /!\ mettre le nom du compte de stockage créer dans le lab 1
-    container_name       = "tfstate"
+    resource_group_name  = "RG-AKSCluster_WKS"     # mettre ici le nom du resource group de vos ressource
+    storage_account_name = "terraformwks"  # /!\ mettre le nom du compte de stockage créer dans le lab 1
+    container_name       = "tfstatewksms"
     key                  = "vm.terraform.tfstate" 
   }
   required_providers {
