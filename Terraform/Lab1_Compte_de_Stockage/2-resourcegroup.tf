@@ -8,7 +8,7 @@
 #                                                                                                     |_|    
 
 # cf. https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group
-resource "azurerm_resource_group" "Terra_tfbackend_rg" {
+resource "azurerm_resource_group" "rg_terra-wks" {
   name     = var.resourceGroupName
   location = var.azureRegion
 }
