@@ -1,42 +1,42 @@
-resource "azurerm_resource_group" "terra_rg" {
+resource "azurerm_resource_group" "RG_AKSCluster_WKS" {
   name     = var.resourceGroupName
   location = var.azureRegion
 }
 
-resource "azurerm_virtual_network" "terra_vnet" {
+resource "azurerm_virtual_network" "terra_vnet_wks" {
   name                = var.vnetName
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.terra_rg.location
-  resource_group_name = azurerm_resource_group.terra_rg.name
+  location            = azurerm_resource_group.RG_AKSCluster_WKS.location
+  resource_group_name = azurerm_resource_group.RG_AKSCluster_WKS.name
 }
 
-resource "azurerm_subnet" "terra_subnet" {
+resource "azurerm_subnet" "terra_subnet_wks" {
   name                 = var.subnetName
-  resource_group_name  = azurerm_resource_group.terra_rg.name
-  virtual_network_name = azurerm_virtual_network.terra_vnet.name
+  resource_group_name  = azurerm_resource_group.RG_AKSCluster_WKS.name
+  virtual_network_name = azurerm_virtual_network.terra_vnet_wks.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
-resource "azurerm_network_interface" "terra_nic" {
+resource "azurerm_network_interface" "terra_nic_wks" {
   name                = var.nicName
-  location            = azurerm_resource_group.terra_rg.location
-  resource_group_name = azurerm_resource_group.terra_rg.name
+  location            = azurerm_resource_group.RG_AKSCluster_WKS.location
+  resource_group_name = azurerm_resource_group.RG_AKSCluster_WKS.name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.terra_subnet.id
+    subnet_id                     = azurerm_subnet.terra_subnet_wks.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
 resource "azurerm_linux_virtual_machine" "terra_vm" {
   name                = var.vmName
-  resource_group_name = azurerm_resource_group.terra_rg.name
-  location            = azurerm_resource_group.terra_rg.location
+  resource_group_name = azurerm_resource_group.RG_AKSCluster_WKS.name
+  location            = azurerm_resource_group.RG_AKSCluster_WKS.location
   size                = var.vmSize
   admin_username      = var.vmUser
   network_interface_ids = [
-    azurerm_network_interface.terra_nic.id,
+    azurerm_network_interface.terra_nic_wks.id,
   ]
 
   admin_ssh_key {
