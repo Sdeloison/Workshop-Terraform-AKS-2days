@@ -3,10 +3,10 @@
 #                   https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container
 
 
-resource "azurerm_storage_account" "Terra-Storage-Backend" {
+resource "azurerm_storage_account" "Terra-Storaged_wks" {
   name                      = var.storageAccountBackendTerraform
-  resource_group_name       = azurerm_resource_group.Terra_tfbackend_rg.name
-  location                  = azurerm_resource_group.Terra_tfbackend_rg.location
+  resource_group_name       = azurerm_resource_group.rg_terra-wks.name
+  location                  = azurerm_resource_group.rg_terra-wks.location
   account_tier              = "Standard"
   account_replication_type  = "GRS"
   account_kind              = "StorageV2"
